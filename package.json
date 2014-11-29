@@ -1,0 +1,18 @@
+{
+  "name": "exemd-dot",
+  "version": "0.0.1",
+  "description": "Dot driver for `exemd`",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Vittorio Zaccaria",
+  "license": "BSD",
+  "dependencies": {
+    "docopt": "~0.4.1",
+    "uid": "0.0.2",
+    "bluebird": "~2.3.11",
+    "verb": "~0.3.7"
+  }
+}
