@@ -8,6 +8,10 @@
 npm i -g exemd-dot
 ```
 
+## Additional instructions
+
+Install `dot` or `graphviz` before this plugin.
+
 ## Options
 
 * No options at the moment.
