@@ -16,10 +16,10 @@ _module = ->
               exec cmd, {+async, +silent}, (code, output) ->
 
                 if not code
-                  resolve(output)
+                    resolve(output)
 
                 else
-                  preject(code)
+                    resolve("```{dot #params}#block```")
 
         else
           resolve("```{dot #params}#block```")

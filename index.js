@@ -21,7 +21,7 @@
             if (!code) {
               return resolve(output);
             } else {
-              return preject(code);
+              return resolve("```{dot " + params + "}" + block + "```");
             }
           });
         } else {
