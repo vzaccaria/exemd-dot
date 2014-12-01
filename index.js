@@ -10,22 +10,20 @@
     process = function(block, opts){
       return new Promise(function(resolve, preject){
         var tempFile, cmd;
-        if (opts.targetMode !== "pure") {
-          if (opts.targetMode === 'html') {
-            tempFile = opts.tmpdir + "/" + uid(7) + ".dot";
-            block.to(tempFile);
-            cmd = "dot -Tsvg " + tempFile;
-            return exec(cmd, {
-              async: true,
-              silent: true
-            }, function(code, output){
-              if (!code) {
-                return resolve(output);
-              } else {
-                return preject(code);
-              }
-            });
-          }
+        if (opts.targetMode !== "pdf") {
+          tempFile = opts.tmpdir + "/" + uid(7) + ".dot";
+          block.to(tempFile);
+          cmd = "dot -Tsvg " + tempFile;
+          return exec(cmd, {
+            async: true,
+            silent: true
+          }, function(code, output){
+            if (!code) {
+              return resolve(output);
+            } else {
+              return preject(code);
+            }
+          });
         } else {
           return resolve("```{dot " + params + "}" + block + "```");
         }

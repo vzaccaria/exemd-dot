@@ -8,9 +8,7 @@ _module = ->
     process = (block, opts) ->
       new Promise (resolve, preject) ->
 
-        if opts.target-mode != "pure"
-
-          if opts.target-mode == 'html'
+        if opts.target-mode != "pdf"
 
               temp-file = "#{opts.tmpdir}/#{uid(7)}.dot"
               block.to(temp-file)
