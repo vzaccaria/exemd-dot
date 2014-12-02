@@ -6,6 +6,7 @@ uid     = require('uid')
 _module = ->
 
     process = (block, opts) ->
+      params = opts.params
       new Promise (resolve, preject) ->
 
         if opts.target-mode != "pdf"
