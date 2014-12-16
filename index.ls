@@ -3,37 +3,48 @@ Promise = require('bluebird')
 {exec}  = require('shelljs')
 uid     = require('uid')
 
+
+
+
+
 _module = ->
 
     process = (block, opts) ->
-      params = opts.params
-      new Promise (resolve, preject) ->
 
-        if opts.target-mode != "pdf"
+      default-is-svg = { 
 
-              temp-file = "#{opts.tmpdir}/#{uid(7)}.dot"
-              block.to(temp-file)
-              cmd = "dot -Tsvg #temp-file"
-              exec cmd, {+async, +silent}, (code, output) ->
+         cmd: (block, tmp-file, tmp-dir) -> 
+            block.to("#tmp-dir/#tmp-file.dot")
+            return "dot -Tsvg #tmp-dir/#tmp-file.dot"
 
-                if not code
-                    resolve(output)
+         output: (tmp-file, tmp-dir, output) -> output 
+         }
 
-                else
-                    resolve("```{dot #params}#block```")
+      targets = {
+        default: default-is-svg
+        svg: default-is-svg
+        png: {
+          cmd: (block, tmp-file, tmp-dir) -> 
+               block.to("#tmp-dir/#tmp-file.dot")
+               return "dot -Tpng #tmp-dir/#tmp-file.dot | base64"
 
-        else
-          resolve("```{dot #params}#block```")
+          output: (tmp-file, tmp-dir, output) -> '\n <img class="exemd--diagram exemd--diagram__dot" src="data:image/png;base64,' + output + '" /> \n'  
+        }
+      }
+
+      opts.plugin-template(targets, block, opts)
 
     iface = {
-
       process: process
-
     }
               
     return iface
                
 module.exports = _module()
+
+
+
+
 
 
 

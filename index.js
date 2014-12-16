@@ -8,26 +8,30 @@
   _module = function(){
     var process, iface;
     process = function(block, opts){
-      return new Promise(function(resolve, preject){
-        var tempFile, cmd;
-        if (opts.targetMode !== "pdf") {
-          tempFile = opts.tmpdir + "/" + uid(7) + ".dot";
-          block.to(tempFile);
-          cmd = "dot -Tsvg " + tempFile;
-          return exec(cmd, {
-            async: true,
-            silent: true
-          }, function(code, output){
-            if (!code) {
-              return resolve(output);
-            } else {
-              return resolve("```{dot " + params + "}" + block + "```");
-            }
-          });
-        } else {
-          return resolve("```{dot " + params + "}" + block + "```");
+      var defaultIsSvg, targets;
+      defaultIsSvg = {
+        cmd: function(block, tmpFile, tmpDir){
+          block.to(tmpDir + "/" + tmpFile + ".dot");
+          return "dot -Tsvg " + tmpDir + "/" + tmpFile + ".dot";
+        },
+        output: function(tmpFile, tmpDir, output){
+          return output;
         }
-      });
+      };
+      targets = {
+        'default': defaultIsSvg,
+        svg: defaultIsSvg,
+        png: {
+          cmd: function(block, tmpFile, tmpDir){
+            block.to(tmpDir + "/" + tmpFile + ".dot");
+            return "dot -Tpng " + tmpDir + "/" + tmpFile + ".dot | base64";
+          },
+          output: function(tmpFile, tmpDir, output){
+            return '\n <img class="exemd--diagram exemd--diagram__dot" src="data:image/png;base64,' + output + '" /> \n';
+          }
+        }
+      };
+      return opts.pluginTemplate(targets, block, opts);
     };
     iface = {
       process: process
