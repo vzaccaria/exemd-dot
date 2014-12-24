@@ -10,9 +10,9 @@
     process = function(block, opts){
       var defaultIsSvg, targets;
       defaultIsSvg = {
-        cmd: function(block, tmpFile, tmpDir){
+        cmd: function(block, tmpFile, tmpDir, params){
           block.to(tmpDir + "/" + tmpFile + ".dot");
-          return "dot -Tsvg " + tmpDir + "/" + tmpFile + ".dot";
+          return "dot -Tsvg " + params + " " + tmpDir + "/" + tmpFile + ".dot";
         },
         output: function(tmpFile, tmpDir, output){
           return output;
@@ -22,9 +22,9 @@
         'default': defaultIsSvg,
         svg: defaultIsSvg,
         png: {
-          cmd: function(block, tmpFile, tmpDir){
+          cmd: function(block, tmpFile, tmpDir, params){
             block.to(tmpDir + "/" + tmpFile + ".dot");
-            return "dot -Tpng " + tmpDir + "/" + tmpFile + ".dot | base64";
+            return "dot -Tpng " + params + " " + tmpDir + "/" + tmpFile + ".dot | base64";
           },
           output: function(tmpFile, tmpDir, output){
             return '\n <img class="exemd--diagram exemd--diagram__dot" src="data:image/png;base64,' + output + '" /> \n';

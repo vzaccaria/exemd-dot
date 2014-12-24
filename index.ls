@@ -13,9 +13,9 @@ _module = ->
 
       default-is-svg = { 
 
-         cmd: (block, tmp-file, tmp-dir) -> 
+         cmd: (block, tmp-file, tmp-dir, params) -> 
             block.to("#tmp-dir/#tmp-file.dot")
-            return "dot -Tsvg #tmp-dir/#tmp-file.dot"
+            return "dot -Tsvg #params #tmp-dir/#tmp-file.dot"
 
          output: (tmp-file, tmp-dir, output) -> output 
          }
@@ -24,9 +24,9 @@ _module = ->
         default: default-is-svg
         svg: default-is-svg
         png: {
-          cmd: (block, tmp-file, tmp-dir) -> 
+          cmd: (block, tmp-file, tmp-dir, params) -> 
                block.to("#tmp-dir/#tmp-file.dot")
-               return "dot -Tpng #tmp-dir/#tmp-file.dot | base64"
+               return "dot -Tpng #params #tmp-dir/#tmp-file.dot | base64"
 
           output: (tmp-file, tmp-dir, output) -> '\n <img class="exemd--diagram exemd--diagram__dot" src="data:image/png;base64,' + output + '" /> \n'  
         }
