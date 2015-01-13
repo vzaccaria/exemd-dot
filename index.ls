@@ -19,7 +19,7 @@ _module = ->
 
          cmd: (block, tmp-file, tmp-dir, params) -> 
             block.to("#tmp-dir/#tmp-file.dot")
-            return "dot -Tsvg #params #tmp-dir/#tmp-file.dot"
+            return "dot -Tsvg #params '#tmp-dir/#tmp-file.dot'"
 
          output: (tmp-file, tmp-dir, output) -> output 
          }
@@ -33,7 +33,7 @@ _module = ->
 
           cmd: (block, tmp-file, tmp-dir, params) -> 
                block.to("#tmp-dir/#tmp-file.dot")
-               return "dot -Tpng #params #tmp-dir/#tmp-file.dot | base64"
+               return "dot -Tpng #params '#tmp-dir/#tmp-file.dot' | base64"
 
           output: (tmp-file, tmp-dir, output) -> '\n <img class="exemd--diagram exemd--diagram__dot" src="data:image/png;base64,' + output + '" /> \n'  
         }
@@ -44,9 +44,9 @@ _module = ->
             block.to("#tmp-dir/#tmp-file.dot")
 
             cc = [
-              "dot -Tsvg #params #tmp-dir/#tmp-file.dot > #tmp-dir/#tmp-file.svg"
-              "mkdir -p #cwd/figures"
-              "cat #tmp-dir/#tmp-file.svg | rsvg-convert -z 0.5 -f pdf > #cwd/figures/f-dot-#{pic-num}.pdf"
+              "dot -Tsvg #params '#tmp-dir/#tmp-file.dot' > '#tmp-dir/#tmp-file.svg'"
+              "mkdir -p '#cwd/figures'"
+              "cat '#tmp-dir/#tmp-file.svg' | rsvg-convert -z 0.5 -f pdf > '#cwd/figures/f-dot-#{pic-num}.pdf'"
               "echo '#cwd/figures/f-dot-#{pic-num}.pdf'"
             ]
             pic-num := pic-num + 1

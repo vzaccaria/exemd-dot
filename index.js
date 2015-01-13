@@ -16,7 +16,7 @@
       defaultIsSvg = {
         cmd: function(block, tmpFile, tmpDir, params){
           block.to(tmpDir + "/" + tmpFile + ".dot");
-          return "dot -Tsvg " + params + " " + tmpDir + "/" + tmpFile + ".dot";
+          return "dot -Tsvg " + params + " '" + tmpDir + "/" + tmpFile + ".dot'";
         },
         output: function(tmpFile, tmpDir, output){
           return output;
@@ -28,7 +28,7 @@
         png: {
           cmd: function(block, tmpFile, tmpDir, params){
             block.to(tmpDir + "/" + tmpFile + ".dot");
-            return "dot -Tpng " + params + " " + tmpDir + "/" + tmpFile + ".dot | base64";
+            return "dot -Tpng " + params + " '" + tmpDir + "/" + tmpFile + ".dot' | base64";
           },
           output: function(tmpFile, tmpDir, output){
             return '\n <img class="exemd--diagram exemd--diagram__dot" src="data:image/png;base64,' + output + '" /> \n';
@@ -39,7 +39,7 @@
             var cc;
             debug("invoked");
             block.to(tmpDir + "/" + tmpFile + ".dot");
-            cc = ["dot -Tsvg " + params + " " + tmpDir + "/" + tmpFile + ".dot > " + tmpDir + "/" + tmpFile + ".svg", "mkdir -p " + cwd + "/figures", "cat " + tmpDir + "/" + tmpFile + ".svg | rsvg-convert -z 0.5 -f pdf > " + cwd + "/figures/f-dot-" + picNum + ".pdf", "echo '" + cwd + "/figures/f-dot-" + picNum + ".pdf'"];
+            cc = ["dot -Tsvg " + params + " '" + tmpDir + "/" + tmpFile + ".dot' > '" + tmpDir + "/" + tmpFile + ".svg'", "mkdir -p '" + cwd + "/figures'", "cat '" + tmpDir + "/" + tmpFile + ".svg' | rsvg-convert -z 0.5 -f pdf > '" + cwd + "/figures/f-dot-" + picNum + ".pdf'", "echo '" + cwd + "/figures/f-dot-" + picNum + ".pdf'"];
             picNum = picNum + 1;
             return join$.call(cc, ' && ');
           },
