@@ -1,6 +1,6 @@
 {
   "name": "exemd-dot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Dot driver for `exemd`",
   "main": "./index.js",
   "keywords": [],
