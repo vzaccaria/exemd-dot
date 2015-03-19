@@ -1,19 +1,12 @@
 # {%= name %} {%= badge("fury") %}
 
-> {%= description %}
-
 {%= include("install-global") %}
 
-## Additional instructions
-
-Install `dot` or `graphviz` before this plugin.
-
-## Options
-
-* No options at the moment.
+{%= partial("description.md") %}
 
 ## Author
-{%= include("author") %}
+
+* Vittorio Zaccaria
 
 ## License
 {%= copyright() %}

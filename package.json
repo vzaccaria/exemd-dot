@@ -1,17 +1,31 @@
 {
   "name": "exemd-dot",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "description": "Dot driver for `exemd`",
-  "main": "./index.js",
-  "keywords": [],
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vzaccaria/exemd-dot.git"
+  },
   "author": "Vittorio Zaccaria",
   "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/vzaccaria/exemd-dot/issues"
+  },
+  "homepage": "https://github.com/vzaccaria/exemd-dot",
   "dependencies": {
-    "docopt": "~0.4.1",
+    "bluebird": "^2.9.14",
+    "debug": "^2.1.3",
+    "diy-build": "^1.0.8",
+    "docopt": "^0.6.0",
     "uid": "0.0.2",
-    "bluebird": "~2.3.11",
-    "shelljs": "~0.3.0",
-    "debug": "~2.1.1",
-    "xyz": "~0.5.0"
+    "shelljs": "~0.3.0"
+  },
+  "devDependencies": {
+    "babel": "^4.7.16",
+    "xyz": "*",
+    "verb": "*",
+    "verb-cli": "*"
   }
 }
