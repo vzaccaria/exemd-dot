@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Dot driver for `exemd`",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "make test"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/vzaccaria/exemd-dot.git"
