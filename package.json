@@ -1,6 +1,6 @@
 {
   "name": "exemd-dot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Dot driver for `exemd`",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,9 @@
     "babel": "^4.7.16",
     "xyz": "*",
     "verb": "*",
-    "verb-cli": "*"
+    "verb-cli": "*",
+    "mocha": "*",
+    "chai": "*",
+    "chai-as-promised": "*"
   }
 }
