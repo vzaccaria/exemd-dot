@@ -1,3 +1,4 @@
+/* @flow */
 var {
   generateProject
 } = require('diy-build')

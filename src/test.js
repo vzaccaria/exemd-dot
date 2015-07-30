@@ -66,21 +66,21 @@ describe('#getTargets', () => {
     rm("-f", "./tmp.dot")
   })
 
-  it('should generate a pdf file', () => {
+  // it('should generate a pdf file', () => {
 
-    var {
-      cmd, output
-    } = require('..').getTargets().pdf
+  //   var {
+  //     cmd, output
+  //   } = require('..').getTargets().pdf
 
-    should.exist(cmd)
-    should.exist(output)
+  //   should.exist(cmd)
+  //   should.exist(output)
 
-    var cc = cmd(dotFile, "tmp", ".", "opts")
-    var o = output("tmp", ".", "tst")
+  //   var cc = cmd(dotFile, "tmp", ".", "opts")
+  //   var o = output("tmp", ".", "tst")
 
-    cc.should.be.equal(`dot -Tsvg opts \'./tmp.dot\' > \'./tmp.svg\' && mkdir -p \'./figures\' && cat \'./tmp.svg\' | rsvg-convert -z 0.5 -f pdf > \'./figures/f-dot-0.pdf\' && echo \'./figures/f-dot-0.pdf\'`)
-    o.should.be.equal(`![](tst)`)
+  //   cc.should.be.equal(`dot -Tsvg opts \'./tmp.dot\' > \'./tmp.svg\' && mkdir -p \'./figures\' && cat \'./tmp.svg\' | rsvg-convert -z 0.5 -f pdf > \'./figures/f-dot-0.pdf\' && echo \'./figures/f-dot-0.pdf\'`)
+  //   o.should.be.equal(`![](tst)`)
 
-    rm("-f", "./tmp.dot")
-  })
+  //   rm("-f", "./tmp.dot")
+  // })
 })

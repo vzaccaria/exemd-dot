@@ -1,60 +1,51 @@
 require('shelljs')
-
+var uid = require('uid')()
 var picnum = 0
 
-var generateSvg = () =>
-{
+var generateSvg = () => {
   "use strict"
   return {
-    cmd: (block, file, dir, params) =>
-    {
+    cmd: (block, file, dir, params) => {
       var fn = `${dir}/${file}.dot`
       block.to(fn)
       return `dot -Tsvg ${params} '${fn}'`
     },
-    output: (file, dir, output) =>
-    {
+    output: (file, dir, output) => {
       return output;
     }
   }
 }
 
-var generatePng = () =>
-{
+var generatePng = () => {
   "use strict"
   return {
-    cmd: (block, file, dir, params) =>
-    {
+    cmd: (block, file, dir, params) => {
       var fn = `${dir}/${file}.dot`
       block.to(fn)
       return `dot -Tpng ${params} '${fn}' | base64`
     },
-    output: (file, dir, output) =>
-    {
+    output: (file, dir, output) => {
       return `\n <img class="exemd--diagram exemd--diagram__dot" src="data:image/png;base64,${output}" /> \n`;
     }
   }
 }
 
-var generatePdf = () =>
-{
+var generatePdf = () => {
   "use strict"
   return {
-    cmd: (block, file, dir, params) =>
-    {
+    cmd: (block, file, dir, params) => {
       var fn = `${dir}/${file}.dot`
       block.to(fn)
       var cc = [
-        `dot -Tsvg ${params} '${dir}/${file}.dot' > '${dir}/${file}.svg'`,
+        `dot -Tpdf ${params} '${dir}/${file}.dot' > '${dir}/${file}.pdf'`,
         `mkdir -p './figures'`,
-        `cat '${dir}/${file}.svg' | rsvg-convert -z 0.5 -f pdf > './figures/f-dot-${picnum}.pdf'`,
-        `echo './figures/f-dot-${picnum}.pdf'`
+        `cp '${dir}/${file}.pdf' './figures/f-dot-${uid}-${picnum}.pdf'`,
+        `echo './figures/f-dot-${uid}-${picnum}.pdf'`
       ]
       picnum = picnum + 1
       return cc.join(' && ')
     },
-    output: (file, dir, output) =>
-    {
+    output: (file, dir, output) => {
       var fname = output
       return `![](${fname})`
     }
@@ -62,12 +53,10 @@ var generatePdf = () =>
 }
 
 
-var _module = () =>
-{
+var _module = () => {
   "use strict";
 
-  var getTargets = () =>
-  {
+  var getTargets = () => {
     var targets = {
       default: generateSvg(),
       svg: generateSvg(),
@@ -77,8 +66,7 @@ var _module = () =>
     return targets
   }
 
-  var process = (block, opts) =>
-  {
+  var process = (block, opts) => {
     return opts.pluginTemplate(getTargets(), block, opts)
   }
 

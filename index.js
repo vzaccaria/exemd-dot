@@ -1,7 +1,7 @@
 "use strict";
 
 require("shelljs");
-
+var uid = require("uid")();
 var picnum = 0;
 
 var generateSvg = function () {
@@ -38,7 +38,7 @@ var generatePdf = function () {
     cmd: function (block, file, dir, params) {
       var fn = "" + dir + "/" + file + ".dot";
       block.to(fn);
-      var cc = ["dot -Tsvg " + params + " '" + dir + "/" + file + ".dot' > '" + dir + "/" + file + ".svg'", "mkdir -p './figures'", "cat '" + dir + "/" + file + ".svg' | rsvg-convert -z 0.5 -f pdf > './figures/f-dot-" + picnum + ".pdf'", "echo './figures/f-dot-" + picnum + ".pdf'"];
+      var cc = ["dot -Tpdf " + params + " '" + dir + "/" + file + ".dot' > '" + dir + "/" + file + ".pdf'", "mkdir -p './figures'", "cp '" + dir + "/" + file + ".pdf' './figures/f-dot-" + uid + "-" + picnum + ".pdf'", "echo './figures/f-dot-" + uid + "-" + picnum + ".pdf'"];
       picnum = picnum + 1;
       return cc.join(" && ");
     },
