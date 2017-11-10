@@ -42,9 +42,9 @@ var generatePdf = function () {
       picnum = picnum + 1;
       return cc.join(" && ");
     },
-    output: function (file, dir, output) {
+    output: function (file, dir, output, params) {
       var fname = output;
-      return "![](" + fname + ")";
+      return "![" + params.title + "](" + fname + ")";
     }
   };
 };
